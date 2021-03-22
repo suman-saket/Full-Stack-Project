@@ -6,6 +6,10 @@ const dotenv = require("dotenv");
 dotenv.config({ path: "./config.env" });
 
 require("./db/db-connection");
+
+app.use(express.json());
+app.use(require("./route/auth.js"));
+
 const port = process.env.PORT;
 
 //middleware()
@@ -14,14 +18,6 @@ const middleware = (req, res, next) => {
   console.log("Hello middleware");
   next();
 };
-
-app.get("/", (req, res) => {
-  res.send("Hello world");
-});
-
-app.get("/about", middleware, (req, res) => {
-  res.send("Hello About world");
-});
 
 app.listen(port, () => {
   console.log(`Server is running on ${port}`);
