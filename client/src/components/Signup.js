@@ -1,17 +1,66 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
+import React, { useState } from "react";
+import { NavLink, useHistory } from "react-router-dom";
 
 const Signup = () => {
+  const history = useHistory();
+  const [user, setUser] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    work: "",
+    password: "",
+    confirmpassword: "",
+  });
+  let name, value;
+  const handleInputs = (e) => {
+    console.log(e);
+    name = e.target.name;
+    value = e.target.value;
+
+    setUser({ ...user, [name]: value });
+  };
+
+  const PostData = async (e) => {
+    e.preventDefault();
+    const { name, email, phone, work, password, confirmpassword } = user;
+    const res = await fetch("/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name,
+        email,
+        phone,
+        work,
+        password,
+        confirmpassword,
+      }),
+    });
+    const data = await res.json();
+    if (data.status === 422 || !data) {
+      window.alert("Invalid Registrtaion");
+      console.log("Invalid Registration");
+    } else {
+      window.alert("Registrtaion Done");
+      console.log("Valid Registration");
+
+      history.push("/login");
+    }
+  };
+
   return (
     <>
       <h1>SignUp</h1>
-      <form>
+      <form method="POST">
         <label htmlFor="name"></label>
         <input
           type="text"
           name="name"
           id="name"
           autoComplete="off"
+          value={user.name}
+          onChange={handleInputs}
           placeholder="Your Name"
         />
         <label htmlFor="email"></label>
@@ -20,6 +69,8 @@ const Signup = () => {
           name="email"
           id="email"
           autoComplete="off"
+          value={user.email}
+          onChange={handleInputs}
           placeholder="Your email"
         />
         <label htmlFor="phone"></label>
@@ -28,6 +79,8 @@ const Signup = () => {
           name="phone"
           id="phone"
           autoComplete="off"
+          value={user.phone}
+          onChange={handleInputs}
           placeholder="Your phone no"
         />
         <label htmlFor="work"></label>
@@ -36,6 +89,8 @@ const Signup = () => {
           name="work"
           id="work"
           autoComplete="off"
+          value={user.work}
+          onChange={handleInputs}
           placeholder="Your profession"
         />
         <label htmlFor="password"></label>
@@ -44,6 +99,8 @@ const Signup = () => {
           name="password"
           id="password"
           autoComplete="off"
+          value={user.password}
+          onChange={handleInputs}
           placeholder="Your password"
         />
         <label htmlFor="confirmpassword"></label>
@@ -52,6 +109,8 @@ const Signup = () => {
           name="confirmpassword"
           id="confirmpassword"
           autoComplete="off"
+          value={user.confirmpassword}
+          onChange={handleInputs}
           placeholder=" confirm your password"
         />
 
@@ -62,6 +121,7 @@ const Signup = () => {
             id="signup"
             className="form-submit"
             value="register"
+            onClick={PostData}
           />
         </div>
       </form>

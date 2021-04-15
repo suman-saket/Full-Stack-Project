@@ -7,7 +7,7 @@ const Navbar = () => {
     <>
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <NavLink className="navbar-brand" to="#">
-          Navbar
+          FullStack Project
         </NavLink>
         <button
           className="navbar-toggler"
