@@ -53,8 +53,8 @@ router.post("/register", (req, res) => {
 
 router.post("/register", async (req, res) => {
   //object destructuirng
-  const { name, email, phone, work, password, confirmPassword } = req.body;
-  if (!name || !email || !phone || !work || !password || !confirmPassword) {
+  const { name, email, phone, work, password, confirmpassword } = req.body;
+  if (!name || !email || !phone || !work || !password || !confirmpassword) {
     return res.status(422).json({ error: "plz fill data" });
   }
 
@@ -64,7 +64,7 @@ router.post("/register", async (req, res) => {
       return res
         .status(400)
         .json({ error: "Email already prsesnt ,Enter new email" });
-    } else if (password != confirmPassword) {
+    } else if (password != confirmpassword) {
       return res.status(400).json({ error: "passowrd did not match" });
     } else {
       const user = new User({
@@ -73,7 +73,7 @@ router.post("/register", async (req, res) => {
         phone,
         work,
         password,
-        confirmPassword,
+        confirmpassword,
       });
 
       const userRegistered = await user.save();
