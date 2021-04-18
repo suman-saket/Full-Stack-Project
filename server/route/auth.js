@@ -2,16 +2,10 @@ const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const authenticate = require("../middleware/authenticate");
+
 require("../db/db-connection");
 const User = require("../model/userSchema");
-
-router.get("/", (req, res) => {
-  res.send("Hello world");
-});
-
-// router.get("/about", middleware, (req, res) => {
-//   res.send("Hello About world");
-// });
 
 //Route to save data posted by user in database using promise syntax
 /*
@@ -124,6 +118,10 @@ router.post("/signin", async (req, res) => {
   } catch (err) {
     res.status(400).send(err);
   }
+});
+
+router.get("/about", authenticate, (req, res) => {
+  res.send(req.rootUser);
 });
 
 module.exports = router;
