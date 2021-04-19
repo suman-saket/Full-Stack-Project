@@ -124,4 +124,9 @@ router.get("/about", authenticate, (req, res) => {
   res.send(req.rootUser);
 });
 
+//get user data for contact and home page
+router.get("/getdata", authenticate, (req, res) => {
+  res.send(req.rootUser);
+});
+
 module.exports = router;
