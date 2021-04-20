@@ -129,4 +129,30 @@ router.get("/getdata", authenticate, (req, res) => {
   res.send(req.rootUser);
 });
 
+router.post("/contact", authenticate, async (req, res) => {
+  try {
+    const { name, email, phone, message } = req.body;
+
+    if (!name || !email || !phone || !message) {
+      console.log("error in contact from");
+
+      return res.json({ error: "plzz fill the contatct from" });
+    }
+
+    const userContact = await User.findOne({ _id: req.userID });
+    if (userContact) {
+      const UserMessage = await userContact.addMessage(
+        name,
+        email,
+        phone,
+        message
+      );
+      await userContact.save();
+      res.status(201).json({ message: "User contact succesfully" });
+    }
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 module.exports = router;
