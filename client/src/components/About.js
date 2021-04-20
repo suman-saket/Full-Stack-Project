@@ -40,7 +40,7 @@ const About = () => {
       <p>{userData.work}</p>
       <p>{userData.email}</p>
       <p>{userData.phone}</p>
-      <p>{userData.peofession}</p>
+      <p>{userData.profession}</p>
     </div>
   );
 };
