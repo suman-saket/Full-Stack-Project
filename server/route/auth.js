@@ -120,6 +120,7 @@ router.post("/signin", async (req, res) => {
   }
 });
 
+//route to get deatils about a logged in user
 router.get("/about", authenticate, (req, res) => {
   res.send(req.rootUser);
 });
@@ -153,6 +154,12 @@ router.post("/contact", authenticate, async (req, res) => {
   } catch (error) {
     console.log(error);
   }
+});
+
+//route for log out functionality
+router.get("/logout", (req, res) => {
+  res.clearCookie("jwtoken", { path: "/" });
+  res.status(200).send("User Logout");
 });
 
 module.exports = router;
