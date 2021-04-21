@@ -8,6 +8,7 @@ import About from "./components/About";
 import Contact from "./components/Contact";
 import Signup from "./components/Signup";
 import Errorpage from "./components/Errorpage";
+import Logout from "./components/Logout";
 
 const App = () => {
   return (
@@ -32,6 +33,10 @@ const App = () => {
 
         <Route path="/signup">
           <Signup />
+        </Route>
+
+        <Route path="/logout">
+          <Logout />
         </Route>
 
         <Route>
