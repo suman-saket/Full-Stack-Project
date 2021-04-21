@@ -1,7 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
+import { UserContext } from "../App";
 
 const Login = () => {
+  const { state, dispatch } = useContext(UserContext);
+
   const history = useHistory();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -25,9 +28,8 @@ const Login = () => {
       window.alert("invalid details");
       console.log("Invalid  details");
     } else {
+      dispatch({ type: "USER", payload: true });
       window.alert("login succesful");
-      console.log("login succesful");
-
       history.push("/");
     }
   };
