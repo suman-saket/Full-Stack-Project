@@ -130,6 +130,7 @@ router.get("/getdata", authenticate, (req, res) => {
   res.send(req.rootUser);
 });
 
+//Contact Page
 router.post("/contact", authenticate, async (req, res) => {
   try {
     const { name, email, phone, message } = req.body;

@@ -1,11 +1,9 @@
 import React, { useContext } from "react";
-import "bootstrap/dist/css/bootstrap.css";
 import { NavLink } from "react-router-dom";
-
 import { UserContext } from "../App";
 
-const Navbar = () => {
-  const { state, dispatch } = useContext(UserContext);
+const NavBar = () => {
+  const { state } = useContext(UserContext);
 
   const RenderMenu = () => {
     if (state) {
@@ -18,7 +16,7 @@ const Navbar = () => {
           </li>
           <li className="nav-item">
             <NavLink className="nav-link" to="/about">
-              About Me
+              About
             </NavLink>
           </li>
           <li className="nav-item">
@@ -26,7 +24,6 @@ const Navbar = () => {
               Contact
             </NavLink>
           </li>
-
           <li className="nav-item">
             <NavLink className="nav-link" to="/logout">
               Logout
@@ -44,7 +41,7 @@ const Navbar = () => {
           </li>
           <li className="nav-item">
             <NavLink className="nav-link" to="/about">
-              About Me
+              About
             </NavLink>
           </li>
           <li className="nav-item">
@@ -57,10 +54,9 @@ const Navbar = () => {
               Login
             </NavLink>
           </li>
-
           <li className="nav-item">
             <NavLink className="nav-link" to="/signup">
-              Registration
+              SignUp
             </NavLink>
           </li>
         </>
@@ -70,8 +66,8 @@ const Navbar = () => {
   return (
     <>
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
-        <NavLink className="navbar-brand" to="#">
-          FullStack Project
+        <NavLink className="navbar-brand" to="/">
+          Hi
         </NavLink>
         <button
           className="navbar-toggler"
@@ -95,4 +91,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default NavBar;

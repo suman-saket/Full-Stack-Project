@@ -1,11 +1,10 @@
-import React, { useEffect, useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { UserContext } from "../App";
-const Logout = () => {
-  //promises
-  const { state, dispatch } = useContext(UserContext);
-  const history = useHistory();
 
+const Logout = () => {
+  const { dispatch } = useContext(UserContext);
+  const history = useHistory();
   useEffect(() => {
     fetch("/logout", {
       method: "GET",
@@ -18,20 +17,14 @@ const Logout = () => {
       .then((res) => {
         dispatch({ type: "USER", payload: false });
         history.push("/login", { replace: true });
-        if (!res.status === 200) {
-          const error = new Error(res.error);
-          throw error;
-        }
+        if (res.status !== 200) throw new Error(res.error);
       })
       .catch((err) => {
         console.log(err);
       });
   });
-  return (
-    <>
-      <h1>Log out ka page</h1>
-    </>
-  );
+
+  return <>{/* <h1>Logout page</h1> */}</>;
 };
 
 export default Logout;
